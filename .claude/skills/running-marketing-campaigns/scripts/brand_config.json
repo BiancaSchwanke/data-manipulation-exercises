@@ -1,0 +1,50 @@
+{
+  "_readme": "Perfil de voz da Arpejo — primeira versão, inferida do texto real do .report (News/Trends/Insights e descrições de campanha @arpejo) lido nesta sessão, não de um guia de voz oficial escrito pela Bianca. Peça pra ela revisar/ajustar antes de tratar como definitivo. Chaves com '_' são notas, não configuração.",
+
+  "_nota_genero": "O checador casa palavra exata (sem radical/gênero), então adjetivos que variam em gênero/número entram com as variantes mais comuns escritas por extenso.",
+
+  "banned_words": [
+    {"word": "revolucionário", "reason": "Superlativo sem sustentação — o report sempre ancora afirmações em dado real", "suggestion": "o número ou fato específico"},
+    {"word": "revolucionária", "reason": "Superlativo sem sustentação", "suggestion": "o número ou fato específico"},
+    {"word": "incrível", "reason": "Hipérbole vaga", "suggestion": "o que especificamente impressiona"},
+    {"word": "único no mercado", "reason": "Superlativo raramente verificável", "suggestion": "o diferencial concreto"},
+    {"word": "única no mercado", "reason": "Superlativo raramente verificável", "suggestion": "o diferencial concreto"},
+    {"word": "líder de mercado", "reason": "Superlativo sem sustentação", "suggestion": "posição/dado específico"},
+    {"word": "de última geração", "reason": "Clichê vago", "suggestion": "a capacidade específica"},
+    {"word": "estado da arte", "reason": "Clichê vago", "suggestion": "a capacidade específica"},
+    {"word": "sinergia", "reason": "Jargão corporativo — não aparece no tom real do report", "suggestion": "'trabalhar junto' ou o benefício específico"},
+    {"word": "alavancar", "reason": "Jargão corporativo (verbo)", "suggestion": "'usar' ou 'aproveitar'"},
+    {"word": "disruptivo", "reason": "Buzzword genérico", "suggestion": "a mudança específica que causa"},
+    {"word": "disruptiva", "reason": "Buzzword genérico", "suggestion": "a mudança específica que causa"},
+    {"word": "engajar o público", "reason": "Vago — o report descreve a ação real, não a intenção genérica", "suggestion": "a ação concreta pedida ao público"},
+    {"word": "solução completa", "reason": "Promessa vaga", "suggestion": "o que a solução realmente resolve"},
+    {"word": "outside the box", "reason": "Clichê batido", "suggestion": "descrever a ideia real"},
+    {"word": "sem precedentes", "reason": "Superlativo sem sustentação", "suggestion": "o dado ou comparação real"},
+    {"word": "obviamente", "reason": "Soa condescendente", "suggestion": "remover"},
+    {"word": "simplesmente", "reason": "Minimiza a complexidade real", "suggestion": "remover ou ser específico"},
+    {"word": "na verdade", "reason": "Tique de linguagem, raramente necessário", "suggestion": "remover"},
+    {"word": "cada vez mais", "reason": "Intensificador vago sem dado — o report prefere número a essa frase", "suggestion": "o número real de crescimento"}
+  ],
+
+  "terminology": {
+    "marcas": ["empresas", "negócios", "companhias"],
+    "tendência": ["trend (fora de título de seção)"],
+    "para as marcas": ["conclusão", "takeaway", "insight final"],
+    "report": ["relatório (fora de contexto formal)"]
+  },
+
+  "tone_keywords": {
+    "analitico_arpejo": ["cresceu", "revelou", "aponta", "registrou", "segundo", "dados mostram"],
+    "cultural_arpejo": ["geração z", "cultura digital", "comportamento", "tendência", "consumidor"],
+    "acao_arpejo": ["para as marcas", "oportunidade", "vale", "pode"],
+    "casual_evitar": ["gonna", "reels", "muito irado", "sensacional"],
+    "hype_evitar": ["incrível", "surpreendente", "impressionante", "sensacional", "fantástico"]
+  },
+
+  "readability_targets": {
+    "flesch_reading_ease_min": 40,
+    "avg_sentence_length_max": 28,
+    "avg_word_length_max": 6,
+    "_nota_pt_br": "O Flesch Reading Ease original foi calibrado pra inglês — palavras em português têm mais sílabas em média, então o mesmo texto tende a pontuar mais baixo só pelo idioma, não porque ficou mais difícil de ler. Os limites acima foram ajustados pra baixo (padrão do script é 60/20/5) pra não sinalizar falso-positivo em toda frase em português. Ainda é uma aproximação — não existe uma fórmula de legibilidade validada pra PT-BR embutida aqui."
+  }
+}
