@@ -112,15 +112,16 @@ sobre um item de fronteira, pergunte à Bianca em vez de decidir sozinho.
    e na prospecção (normalmente 3-6 itens cada) — confirme com a Bianca antes
    de montar o design, é mais barato ajustar a lista do que redesenhar slides.
 3. **Gere os arquivos com a skill `pptx`** (carregue-a antes de montar
-   qualquer slide). Prefira escrever um script `pptxgenjs` do zero para cada
-   peça — os formatos (vertical 4:5 para Instagram, 16:9 para as outras) não
-   batem com o canvas customizado do template original, então recriar os
-   componentes visuais (card colorido, badge oval, grid de "+", setas de
-   canto) como funções reutilizáveis é mais confiável do que tentar clonar
-   slides do arquivo-fonte. Use os tokens de `references/identity.md` para
-   cor, fonte e motivos gráficos, e o arquivo
-   `assets/arpejo-report-logo.png` para o wordmark sempre que a peça precisar
-   assinar como Arpejo.
+   qualquer slide), **e também a skill `brand-guidelines`** para os tokens de
+   cor/tipografia/motivos — este skill não duplica mais essa informação, só
+   documenta em `references/identity.md` os layouts específicos de cada tipo
+   de card do report. Prefira escrever um script `pptxgenjs` do zero para
+   cada peça — os formatos (vertical 4:5 para Instagram, 16:9 para as
+   outras) não batem com o canvas customizado do template original, então
+   recriar os componentes visuais como funções reutilizáveis é mais
+   confiável do que tentar clonar slides do arquivo-fonte. Use o arquivo
+   `assets/arpejo-report-logo.png` para o wordmark sempre que a peça
+   precisar assinar como Arpejo.
 4. **QA obrigatório**: rode a validação e a conversão para imagem da skill
    `pptx` e confira visualmente cada slide antes de entregar — texto cortado,
    contraste ruim (texto escuro sobre preto, etc.) e alinhamento são os erros
