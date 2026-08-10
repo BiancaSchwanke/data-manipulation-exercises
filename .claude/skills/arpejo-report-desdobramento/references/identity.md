@@ -28,17 +28,19 @@ carrossel, que circula solto no feed).
   dele, headline em negrito, parágrafo, opcionalmente bullet list ou "Para as
   marcas:" em negrito como fechamento, seta diagonal no canto inferior
   direito.
-- **Card de Trend**: fundo fotográfico full-bleed escurecido, card limão
-  arredondado à esquerda com nome da tendência (itálico, 2 linhas) +
-  subtítulo itálico menor, thumbnail da referência dentro do card; parágrafo
-  analítico à direita sobre a foto, fechando com "Para as marcas:" em
-  negrito. Ver a regra de procedência de imagem no SKILL.md antes de
-  reaproveitar a foto original: se for still de campanha de marca terceira,
-  esse tratamento com foto só vale para o material de cliente (é o que o
-  `material-cliente-agosto26.pptx` faz — scrim escuro na base do card com o
-  texto por cima). No carrossel público, sem uma foto de procedência
-  confirmada como genérica, use o fallback de card de cor sólida (como o de
-  News) em vez da foto — foi a decisão registrada no carrossel de agosto/26.
+- **Card de Trend**: fundo fotográfico full-bleed escurecido (scrim preto
+  translúcido atrás do texto, não card lime opaco — é o tratamento adotado a
+  partir de agosto/26 no carrossel, na prospecção e no material de cliente),
+  nome da tendência em itálico bold lime + subtítulo/parágrafo em branco.
+  Ver a regra de procedência de imagem no SKILL.md antes de reaproveitar
+  qualquer foto: still de campanha de marca terceira (ex. o Loewe da
+  Hiper-realidade, o F1/Charlotte Tilbury do Sport Fandom) só entra no
+  carrossel/prospecção com autorização explícita da Bianca — ela liberou
+  esses dois especificamente em agosto/26 ("usar as mesmas imagens em todos
+  os materiais"). Para Experiências Transformadoras e Geração Sem Ressaca,
+  a Bianca mandou fotos de banco genérico dela mesma (sem marca de terceiro),
+  que são sempre seguras pra qualquer peça. Sem imagem de procedência
+  confirmada, use o fallback de card de cor sólida (como o de News).
 - **Card de campanha própria (@arpejo)**: fundo preto com grid de "+", badge
   oval branco com "Cliente - Campanha", geralmente sem corpo de texto (é
   usado como divisor/showcase).
