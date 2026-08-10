@@ -34,11 +34,25 @@ peça, alterne limão/coral entre eles para dar ritmo.
 
 ## Tipografia
 
+Confirmado direto nas fontes embutidas no PDF do report (via `pdffonts`, ver
+`arpejo-report-desdobramento`) — o sistema tipográfico real é mais rico do que
+parecia à primeira vista:
+
 | Papel | Fonte | Arquivo real bundlado | Fallback se a fonte não estiver instalada | Uso |
 |---|---|---|---|---|
-| Título / destaque | Libre Baskerville, itálico | `assets/fonts/LibreBaskerville-Regular.ttf` | Cambria itálico | Nomes de tendência, títulos de seção, headlines |
-| Tag técnica | JetBrains Mono | `assets/fonts/JetBrainsMono-Regular.ttf` / `-Bold.ttf` | Courier New | Datas, legendas, badges de dado |
-| Corpo de texto | Sans (Urbanist) | *(não bundlado — sem arquivo livre localizado ainda)* | Arial | Parágrafos, bullets |
+| Título / destaque | Libre Baskerville (Italic, Bold, Regular, BoldItalic) | `assets/fonts/LibreBaskerville-Regular.ttf` | Cambria itálico | Nomes de tendência, títulos de seção, headlines |
+| Display de capa | DM Serif Display Regular | *(não bundlado)* | Cambria | Wordmark ".report" e títulos de capa |
+| Tag técnica | JetBrains Mono Medium | `assets/fonts/JetBrainsMono-Regular.ttf` / `-Bold.ttf` | Courier New | Datas, legendas, badges de dado |
+| Tag técnica (variante) | Ubuntu Mono (Regular/Bold/BoldItalic) | *(não bundlado)* | Courier New | Parágrafos analíticos em alguns cards de Trend |
+| Ênfase pontual | Red Hat Display BoldItalic | *(não bundlado)* | Arial Bold Italic | Destaques bold dentro de parágrafo |
+| Corpo de texto | Urbanist (BoldItalic confirmado) | *(não bundlado)* | Arial | Parágrafos, bullets |
+
+As fontes "não bundladas" existem no PDF apenas como subconjunto (só os
+caracteres já usados) — dá pra extrair com `pdffonts`/`mutool`, mas não
+cobrem letras novas que você venha a escrever. Se precisar delas completas,
+peça pra Bianca exportar os `.ttf` de onde o report é montado (parece Canva,
+pelos nomes de fonte e pelos assets de textura abaixo) ou baixá-los do Google
+Fonts — o acesso à internet deste ambiente não alcança fonts.google.com.
 
 Títulos sempre em itálico serifado — é a assinatura mais reconhecível da
 marca, mais até que a cor. Corpo de texto alinhado à esquerda, nunca
@@ -66,26 +80,47 @@ finalizar.
 
 ## Motivos gráficos (repetir sempre que possível)
 
+Os motivos abaixo não são aproximação — são os assets reais extraídos direto
+do PDF do report (`pdfimages`, ver `arpejo-report-desdobramento/scripts/`),
+não fontes gráficas que compõem o texto: são raster com transparência,
+recolorido por script quando o motivo aparece em mais de uma cor. Todos em
+`assets/textures/`:
+
 1. **Badge oval** — elipse sem preenchimento, contorno fino, texto
-   centralizado dentro. É o "rótulo" padrão do sistema — usar no lugar de
-   títulos de slide convencionais sempre que fizer sentido.
-2. **Setas de canto** (↖ ↗ / ↙ ↘) enquadrando slides de abertura/divisor,
-   como uma moldura de viewfinder.
-3. **Seta diagonal única** (↘) no canto inferior direito de cards de
-   conteúdo, na cor do texto do card — assinatura de rodapé.
-4. **Grid de cruzes "+"** pontilhado como textura de fundo em blocos pretos.
-5. **Cantos arredondados** em cards que flutuam sobre fundo cheio ou foto.
-6. **Wordmark** — usar sempre o arquivo `assets/arpejo-logo.png` (fundo
+   centralizado dentro, com o ícone de globo (`globe-lime.png` /
+   `globe-black.png` / `globe-white.png`) encostado à direita do texto. É o
+   "rótulo" padrão do sistema — usar no lugar de títulos de slide
+   convencionais sempre que fizer sentido.
+2. **Seta "7"** (`arrow-lime.png` / `arrow-black.png` / `arrow-white.png`) —
+   usada de dois jeitos: girada nos 4 cantos de slides de abertura/divisor
+   (0°/90°/180°/270°, a mesma imagem author aponta nordeste por padrão), e
+   sozinha no canto inferior direito de cards de conteúdo como assinatura de
+   rodapé.
+3. **Grid de cruzes "+"** — `plus-grid-on-black.png`, textura pronta em
+   1920×1080 (16:9) para colar como fundo cheio de slide; só serve para
+   canvas 16:9, num canvas de outra proporção (ex. carrossel 4:5) as cruzes
+   ficam ovais esticadas — nesse caso gere o grid com texto/glifo em vez de
+   usar a imagem.
+4. **Anéis entrelaçados** (`rings-lime.png`) — ícone decorativo que acompanha
+   o globo no cabeçalho de slides divisores.
+5. **Ondas da capa** (`wavy-lines-white.png`) e **marca "✳"** de canto
+   (`sparkle-white.png`) — usados só na capa do report original; a orientação
+   exata (o asset é um recorte vertical, usado rotacionado ~90° na página
+   original) ainda não foi confirmada visualmente neste ambiente — confirme
+   ao abrir o arquivo antes de dar como certo.
+6. **Cantos arredondados** em cards que flutuam sobre fundo cheio ou foto.
+7. **Wordmark** — usar sempre o arquivo `assets/arpejo-logo.png` (fundo
    transparente), nunca recriar o logotipo como texto.
 
 ## Como aplicar
 
-- Ao gerar um `.pptx`, use a skill `pptx` e recrie estes componentes como
-  funções reutilizáveis (cor sólida de fundo, `addShape("ellipse", ...)` sem
-  preenchimento para o badge, texto com os glifos de seta para os cantos) —
-  não existe um asset vetorial pronto para esses motivos além do logo.
+- Ao gerar um `.pptx`, use a skill `pptx` **e os assets reais de
+  `assets/textures/`** em vez de recriar os motivos com glifos de texto —
+  `addImage` com `rotate` pros 4 cantos da seta, `addImage` esticado pro
+  grid de "+" em canvas 16:9. Só use glifo/texto como aproximação quando o
+  asset real não serve na proporção do canvas (ex. carrossel vertical).
 - Ao gerar HTML/artifact, web page ou documento, traduza os mesmos tokens:
-  paleta de cor, itálico serifado em títulos, mono em legendas, badge oval,
-  grid de "+" como textura de fundo.
+  paleta de cor, itálico serifado em títulos, mono em legendas, badge oval
+  com globo, grid de "+" como textura de fundo.
 - Nunca aplique a paleta padrão azul/genérica de um template — se a peça é da
   Arpejo, ela carrega limão/coral/preto e a tipografia serifada itálica.
