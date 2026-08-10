@@ -34,15 +34,35 @@ peça, alterne limão/coral entre eles para dar ritmo.
 
 ## Tipografia
 
-| Papel | Fonte | Fallback seguro | Uso |
-|---|---|---|---|
-| Título / destaque | Libre Baskerville, itálico | Cambria itálico | Nomes de tendência, títulos de seção, headlines |
-| Tag técnica | Mono (Ubuntu Mono / JetBrains Mono Medium) | Courier New | Datas, legendas, badges de dado |
-| Corpo de texto | Sans (Urbanist) | Arial | Parágrafos, bullets |
+| Papel | Fonte | Arquivo real bundlado | Fallback se a fonte não estiver instalada | Uso |
+|---|---|---|---|---|
+| Título / destaque | Libre Baskerville, itálico | `assets/fonts/LibreBaskerville-Regular.ttf` | Cambria itálico | Nomes de tendência, títulos de seção, headlines |
+| Tag técnica | JetBrains Mono | `assets/fonts/JetBrainsMono-Regular.ttf` / `-Bold.ttf` | Courier New | Datas, legendas, badges de dado |
+| Corpo de texto | Sans (Urbanist) | *(não bundlado — sem arquivo livre localizado ainda)* | Arial | Parágrafos, bullets |
 
 Títulos sempre em itálico serifado — é a assinatura mais reconhecível da
 marca, mais até que a cor. Corpo de texto alinhado à esquerda, nunca
 centralizado.
+
+**Usando as fontes reais (não o fallback):** `assets/fonts/` tem os `.ttf` de
+Libre Baskerville e JetBrains Mono (licença OFL, redistribuição livre — ver os
+`.txt` ao lado de cada fonte). Ao gerar um `.pptx`, use `fontFace: "Libre
+Baskerville"` / `"JetBrains Mono"` diretamente em vez do fallback — só caia
+para Cambria/Courier New se o objetivo for a pré-visualização de QA neste
+ambiente (que substitui fontes não instaladas e pode não refletir a largura
+real do texto). Como o pptxgenjs não embute a fonte dentro do arquivo:
+- Para a Bianca ver a fonte certa localmente, instale os `.ttf` de
+  `assets/fonts/` no sistema, ou
+- Antes de compartilhar o arquivo final, ative "Inserir fontes no arquivo"
+  no PowerPoint (Arquivo > Opções > Salvar) para o `.pptx` carregar as fontes
+  certas em qualquer computador.
+
+Não há um corte itálico verdadeiro de Libre Baskerville bundlado — apenas o
+Regular. Usar `italic: true` no pptxgenjs aplica um itálico sintético/oblíquo
+sobre o Regular, o que é uma aproximação aceitável, mas não é o mesmo desenho
+de um itálico desenhado à mão. Se a fidelidade tipográfica for crítica (ex.:
+material impresso), vale localizar um corte itálico real da fonte antes de
+finalizar.
 
 ## Motivos gráficos (repetir sempre que possível)
 
