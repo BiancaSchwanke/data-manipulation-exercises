@@ -34,49 +34,56 @@ peça, alterne limão/coral entre eles para dar ritmo.
 
 ## Tipografia
 
-Confirmado direto nas fontes embutidas no PDF do report (via `pdffonts`, ver
-`arpejo-report-desdobramento`) — o sistema tipográfico real é mais rico do que
-parecia à primeira vista:
+Confirmado com a fonte mais confiável possível: o próprio
+`arpejo.report_1.pptx` (o master do report) embute as quatro famílias
+completas — Regular/Bold/Italic/BoldItalic de cada — como fontes reais do
+PowerPoint (`ppt/fonts/*.fntdata`, ver "Fontes embutidas" abaixo).
 
-| Papel | Fonte | Arquivo real bundlado | Fallback se a fonte não estiver instalada | Uso |
-|---|---|---|---|---|
-| Título / destaque | Libre Baskerville (Italic, Bold, Regular, BoldItalic) | `assets/fonts/LibreBaskerville-Regular.ttf` | Cambria itálico | Nomes de tendência, títulos de seção, headlines |
-| Display de capa | DM Serif Display Regular | *(não bundlado)* | Cambria | Wordmark ".report" e títulos de capa |
-| Tag técnica | JetBrains Mono Medium | `assets/fonts/JetBrainsMono-Regular.ttf` / `-Bold.ttf` | Courier New | Datas, legendas, badges de dado |
-| Tag técnica (variante) | Ubuntu Mono (Regular/Bold/BoldItalic) | *(não bundlado)* | Courier New | Parágrafos analíticos em alguns cards de Trend |
-| Ênfase pontual | Red Hat Display BoldItalic | *(não bundlado)* | Arial Bold Italic | Destaques bold dentro de parágrafo |
-| Corpo de texto | Urbanist (BoldItalic confirmado) | *(não bundlado)* | Arial | Parágrafos, bullets |
+| Papel | Fonte | Uso |
+|---|---|---|
+| Título / destaque | Libre Baskerville | Nomes de tendência, títulos de seção, headlines — sempre no corte itálico |
+| Corpo de texto | Urbanist | Parágrafos, bullets |
+| Tag técnica | JetBrains Mono Medium | Datas, legendas, badges de dado |
+| Tag técnica (variante) | Ubuntu Mono | Parágrafos analíticos em alguns cards de Trend |
 
-As fontes "não bundladas" existem no PDF apenas como subconjunto (só os
-caracteres já usados) — dá pra extrair com `pdffonts`/`mutool`, mas não
-cobrem letras novas que você venha a escrever. Se precisar delas completas,
-peça pra Bianca exportar os `.ttf` de onde o report é montado (parece Canva,
-pelos nomes de fonte e pelos assets de textura abaixo) ou baixá-los do Google
-Fonts — o acesso à internet deste ambiente não alcança fonts.google.com.
+O PDF de uma edição específica (agosto/26) também trouxe glifos de DM Serif
+Display Regular e Red Hat Display BoldItalic em alguns pontos pontuais (ex.
+o wordmark ".report" da capa) — mas só como subconjunto dentro do PDF, sem
+arquivo de fonte completo disponível; não bundlados.
 
 Títulos sempre em itálico serifado — é a assinatura mais reconhecível da
 marca, mais até que a cor. Corpo de texto alinhado à esquerda, nunca
 centralizado.
 
-**Usando as fontes reais (não o fallback):** `assets/fonts/` tem os `.ttf` de
-Libre Baskerville e JetBrains Mono (licença OFL, redistribuição livre — ver os
-`.txt` ao lado de cada fonte). Ao gerar um `.pptx`, use `fontFace: "Libre
-Baskerville"` / `"JetBrains Mono"` diretamente em vez do fallback — só caia
-para Cambria/Courier New se o objetivo for a pré-visualização de QA neste
-ambiente (que substitui fontes não instaladas e pode não refletir a largura
-real do texto). Como o pptxgenjs não embute a fonte dentro do arquivo:
-- Para a Bianca ver a fonte certa localmente, instale os `.ttf` de
-  `assets/fonts/` no sistema, ou
-- Antes de compartilhar o arquivo final, ative "Inserir fontes no arquivo"
-  no PowerPoint (Arquivo > Opções > Salvar) para o `.pptx` carregar as fontes
-  certas em qualquer computador.
+**Usando as fontes reais:** `assets/fonts/*.ttf` (Libre Baskerville e
+JetBrains Mono, licença OFL) servem pra referência rápida e pré-visualização,
+mas para o arquivo final use `assets/fonts/embed/*.fntdata` — são as quatro
+famílias completas (16 arquivos, incluindo Urbanist e Ubuntu Mono) tal como
+o próprio report as embute, copiadas byte a byte do `arpejo.report_1.pptx`.
 
-Não há um corte itálico verdadeiro de Libre Baskerville bundlado — apenas o
-Regular. Usar `italic: true` no pptxgenjs aplica um itálico sintético/oblíquo
-sobre o Regular, o que é uma aproximação aceitável, mas não é o mesmo desenho
-de um itálico desenhado à mão. Se a fidelidade tipográfica for crítica (ex.:
-material impresso), vale localizar um corte itálico real da fonte antes de
-finalizar.
+## Fontes embutidas (`.pptx` renderiza certo em qualquer computador)
+
+`pptxgenjs` não tem como embutir fonte no arquivo que gera — sem isso, quem
+abre o `.pptx` num computador sem essas fontes instaladas vê um substituto.
+Em vez de depender de instalação local ou do "Inserir fontes no arquivo" do
+PowerPoint, rode o script depois de gerar o arquivo:
+
+```bash
+python scripts/embed_fonts.py caminho/do/deck.pptx
+```
+
+Ele copia os 16 arquivos `.fntdata` pra dentro do `.pptx` e cuida de toda a
+parte de metadados (`[Content_Types].xml`, relações, `embeddedFontLst` em
+`presentation.xml`) — sem precisar entender o formato de ofuscação de fonte
+do PowerPoint, só copia os blobs e liga as referências, exatamente como o
+report original faz. **Sempre rode esse script como último passo, depois do
+`pptxgenjs` e de qualquer edição de XML, e valide com
+`scripts/office/validate.py` em seguida.**
+
+Não há um corte itálico verdadeiro de Libre Baskerville nos `.ttf` soltos em
+`assets/fonts/` (só o Regular) — mas os `.fntdata` em `assets/fonts/embed/`
+têm os quatro cortes completos, então prefira sempre embutir em vez de contar
+com o itálico sintético do fallback.
 
 ## Motivos gráficos (repetir sempre que possível)
 
