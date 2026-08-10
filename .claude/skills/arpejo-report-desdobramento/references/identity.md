@@ -32,9 +32,13 @@ carrossel, que circula solto no feed).
   arredondado à esquerda com nome da tendência (itálico, 2 linhas) +
   subtítulo itálico menor, thumbnail da referência dentro do card; parágrafo
   analítico à direita sobre a foto, fechando com "Para as marcas:" em
-  negrito. Sem banco de imagens disponível, um fallback aceitável é usar o
-  layout de card colorido (como o de News) em vez da foto — ver decisão
-  registrada no carrossel de agosto/26.
+  negrito. Ver a regra de procedência de imagem no SKILL.md antes de
+  reaproveitar a foto original: se for still de campanha de marca terceira,
+  esse tratamento com foto só vale para o material de cliente (é o que o
+  `material-cliente-agosto26.pptx` faz — scrim escuro na base do card com o
+  texto por cima). No carrossel público, sem uma foto de procedência
+  confirmada como genérica, use o fallback de card de cor sólida (como o de
+  News) em vez da foto — foi a decisão registrada no carrossel de agosto/26.
 - **Card de campanha própria (@arpejo)**: fundo preto com grid de "+", badge
   oval branco com "Cliente - Campanha", geralmente sem corpo de texto (é
   usado como divisor/showcase).

@@ -60,6 +60,27 @@ resista: proponha em vez disso usar um item de NEWS ou TRENDS equivalente, ou
 citar o caso de forma genérica sem atribuir a marca. Se estiver em dúvida
 sobre um item de fronteira, pergunte à Bianca em vez de decidir sozinho.
 
+## Regra inegociável: procedência das fotos de Trends/News
+
+Nem toda foto usada como evidência de tendência é banco de imagens genérico —
+às vezes é still de uma campanha publicitária real de uma marca terceira (ex.:
+na edição de agosto/26, os 4 fundos de Trends eram creative de Loewe,
+Heineken, Charlotte Tilbury/F1 e Skol). Reaproveitar isso como plano de fundo
+decorativo do carrossel público ou da prospecção passa a impressão de
+afiliação com aquela marca e usa a criação publicitária de terceiros sem
+autorização — o mesmo tipo de risco do Insights, mas de direito de imagem/marca
+em vez de confidencialidade.
+
+Antes de reaproveitar qualquer foto do report num material novo, verifique a
+procedência: se é fotografia de banco genérica (sem logotipo, marca ou produto
+identificável de terceiros), pode ir para qualquer peça, inclusive o carrossel
+público; se é still de campanha/produto de uma marca terceira, trate como
+Insights — só na peça de cliente. Use
+`scripts/extract_report_photos.py` para extrair a foto de fundo direto do PDF
+(evita a perda de qualidade de um print da página renderizada) e a skill
+`image-enhancer` para melhorar resolução/nitidez antes de embutir — nunca
+declare uma imagem "melhorada" sem ter rodado o processamento de verdade.
+
 ## As três peças
 
 ### 1. Carrossel Instagram (@arpejo)
