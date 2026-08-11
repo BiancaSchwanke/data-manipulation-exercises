@@ -56,7 +56,10 @@ carrossel, que circula solto no feed).
     (título → foto → texto), com a faixa de plus-grid embaixo; `bandTop:
     true` põe o texto logo abaixo do título e deixa a foto sangrar até a
     borda do slide, com a faixa de plus-grid em cima. Alterne entre as
-    variantes pra dar ritmo ao carrossel.
+    variantes pra dar ritmo ao carrossel. Sempre coloque a foto com
+    `addCoverImage()` de `lib/identity.js`, nunca com `s.addImage` +
+    `sizing: { type: "cover" }` direto — ver a explicação do bug em
+    `SKILL.md` ("Duas pegadinhas do pptxgenjs").
 
   Ver a regra de procedência de imagem no SKILL.md antes de reaproveitar
   qualquer foto: still de campanha de marca terceira (ex. o Loewe da

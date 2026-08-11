@@ -164,25 +164,42 @@ declare uma imagem "melhorada" sem ter rodado o processamento de verdade.
    cor/tipografia/motivos — este skill não duplica mais essa informação, só
    documenta em `references/identity.md` os layouts específicos de cada tipo
    de card do report. Para o **carrossel do Instagram, reutilize
-   `scripts/build-instagram-carousel.js`** (só edite o conteúdo do mês, ver
-   os comentários "EDITAR TODO MÊS" no arquivo) em vez de redesenhar o
-   layout do zero — é o padrão confirmado pela Bianca. Para prospecção e
-   material de cliente (16:9, sem template persistido ainda), prefira
-   escrever um script `pptxgenjs` do zero — os formatos não batem com o
-   canvas customizado do arquivo-fonte, então recriar os componentes visuais
-   como funções reutilizáveis é mais confiável do que tentar clonar slides
-   direto do report. Use o arquivo `assets/arpejo-report-logo.png` (ou a
-   variante `arpejo-report-logo-all-black.png` sobre fundo limão) para o
-   wordmark sempre que a peça precisar assinar como Arpejo. Depois de gerar
-   qualquer `.pptx`, rode `brand-guidelines/scripts/embed_fonts.py` nele —
-   pptxgenjs não embute fontes sozinho. Se algum slide encaixa uma foto num
-   painel de cantos arredondados desenhando um contorno `roundRect` por cima
-   (em vez de inserir a foto com margem dentro do painel), rode também
-   `brand-guidelines/scripts/clip_pictures_to_roundrect.py` — o `addImage` do
-   pptxgenjs só recorta em retângulo ou elipse, então a foto quadrada vaza
-   pelos cantos do contorno arredondado; o script copia a geometria
-   `roundRect` do contorno pra própria imagem direto no XML, sem precisar
-   mexer no pptxgenjs.
+   `scripts/build-instagram-carousel.js`**, e para a **prospecção,
+   `scripts/build-prospeccao.js`** (só edite o conteúdo do mês, ver os
+   comentários "EDITAR TODO MÊS" nos arquivos) em vez de redesenhar o layout
+   do zero — são os padrões confirmados pela Bianca (agosto/26, incluindo o
+   corte de foto corrigido — ver `addCoverImage` abaixo). Para material de
+   cliente (16:9, sem template persistido ainda), prefira escrever um script
+   `pptxgenjs` do zero — os formatos não batem com o canvas customizado do
+   arquivo-fonte, então recriar os componentes visuais como funções
+   reutilizáveis é mais confiável do que tentar clonar slides direto do
+   report. Use o arquivo `assets/arpejo-report-logo.png` (ou a variante
+   `arpejo-report-logo-all-black.png` sobre fundo limão) para o wordmark
+   sempre que a peça precisar assinar como Arpejo.
+
+   **Duas pegadinhas do pptxgenjs a evitar em qualquer script novo (o
+   carrossel e a prospecção já usam essas correções, mantenha-as se
+   editar):**
+   - **Foto cortada pra caber numa caixa** (`sizing: { type: "cover" }`):
+     nunca chame `s.addImage` direto com isso — o cálculo de corte do
+     pptxgenjs (4.0.1) usa o tamanho da própria caixa de destino em vez do
+     tamanho real da imagem, o que sempre resulta em corte zero (a foto
+     esticada, distorcida, em vez de cortada). Use `addCoverImage(slide, {
+     path, x, y, w, h })` de `lib/identity.js` em vez disso — ele lê as
+     dimensões reais do arquivo e contorna o bug.
+   - **Foto num painel de cantos arredondados**: se o painel usa um
+     contorno `roundRect` desenhado por cima da foto pra simular o
+     enquadramento (em vez de inserir a foto com margem para dentro do
+     painel), a foto quadrada vaza pelos cantos arredondados do contorno —
+     o `addImage` do pptxgenjs só recorta em retângulo reto ou elipse.
+     Depois de gerar o `.pptx`, rode
+     `brand-guidelines/scripts/clip_pictures_to_roundrect.py` nele — copia
+     a geometria `roundRect` do contorno pra própria imagem direto no XML,
+     sem precisar mexer no pptxgenjs.
+
+   Depois de gerar qualquer `.pptx`, rode
+   `brand-guidelines/scripts/embed_fonts.py` nele — pptxgenjs não embute
+   fontes sozinho.
 4. **QA obrigatório**: rode a validação de schema da skill `pptx`
    (`python-pptx` consegue abrir o arquivo, XML válido) antes de entregar.
    **A conversão `.pptx`→imagem via LibreOffice/`soffice` está quebrada
