@@ -6,9 +6,24 @@ documento e ajuste só o conteúdo mês a mês.
 
 ## O que é
 
-Uma **imagem única e alta** (não é `.pptx`, não é slide deck) pra colar
-direto no corpo de um e-mail/campanha de CRM enviada aos clientes. Layout de
-newsletter contínua (rolagem vertical), na identidade visual do `.report`.
+O News de CRM tem **dois formatos de saída**, mesmo conteúdo e mesma
+identidade visual, pra dois jeitos diferentes de disparar:
+
+1. **Imagem única e alta** (não é `.pptx`, não é slide deck) pra colar
+   direto no corpo de um e-mail já pronto (ex.: e-mail simples do Gmail/
+   Outlook, ou quando a ferramenta de CRM só aceita uma imagem). Layout de
+   newsletter contínua (rolagem vertical), gerada por
+   `scripts/build_news_email.py` + `scripts/capture_news_email.py`.
+2. **HTML real de e-mail marketing** (tabelas, estilo inline, sem
+   depender de CSS externo) pra colar no editor de HTML de uma ferramenta
+   de e-mail marketing (Mailchimp, RD Station, etc.) — cada bloco é texto
+   de verdade (selecionável, indexável) e os links reais (@arpejo)
+   funcionam de fato, em vez de precisar de hotspot por cima de uma
+   imagem. Gerado por `scripts/build_news_email_marketing_html.py`. Ver
+   "Formato 2" abaixo pras diferenças e limitações desse modo.
+
+Confirme com a Bianca qual formato ela precisa antes de gerar (ou gere os
+dois — o conteúdo é o mesmo, o custo de gerar ambos é baixo).
 
 ## Referências usadas (só de estrutura, nunca de identidade visual)
 
@@ -80,7 +95,7 @@ cada título, apontando pro destino real.
   invente um link — pergunte à Bianca o destino (site da Arpejo, LP do
   report completo, ou sem link mesmo) antes de fechar a campanha.
 
-## Detalhes técnicos
+## Detalhes técnicos — Formato 1 (imagem única)
 
 - **Não é pptxgenjs**: como a peça final é uma imagem só (não um slide
   deck), o script gera HTML/CSS autocontido (fontes e fotos em base64) e
@@ -109,12 +124,52 @@ cada título, apontando pro destino real.
   imagem de cima a baixo. Pacing confirmado: 110ms por frame (60ms ficou
   rápido demais).
 
+## Detalhes técnicos — Formato 2 (HTML de e-mail marketing)
+
+`scripts/build_news_email_marketing_html.py` gera o HTML de verdade,
+pronto pra colar no editor de HTML de uma ferramenta de e-mail marketing.
+É um código diferente do Formato 1 (não é o mesmo HTML/CSS reaproveitado)
+porque as regras de e-mail HTML são bem mais restritas que uma página web
+qualquer:
+
+- **Tabelas + estilo inline, não `<div>`/CSS**: Outlook desktop renderiza
+  com o motor do Word — sem flexbox, sem `background-image` em CSS, sem
+  `border-radius` garantido. `<table>` com `style=""` inline em cada `<td>`
+  é o único layout que sobrevive em todo cliente de e-mail.
+- **Fontes com fallback web-safe, não as fontes reais da marca**: fonte
+  customizada via `@font-face` não é confiável em e-mail (Gmail remove,
+  Outlook desktop ignora). Esse formato usa Georgia/serif no lugar da
+  Libre Baskerville itálica e Courier New/monospace no lugar da JetBrains
+  Mono — é uma perda visual real em relação ao `.pptx`/imagem, avise a
+  Bianca em vez de fingir que é a mesma fonte.
+- **Fotos pré-cortadas em arquivo, não `background-size: cover`**: Outlook
+  não corta via CSS, então cada foto de trend já sai cortada no tamanho
+  exato da caixa (`export_assets()` no script, usando Pillow) em vez de
+  depender do corte automático do CSS como no Formato 1.
+- **Sem imagem em base64**: muitas ferramentas de e-mail bloqueiam ou
+  removem `data:` URIs, e um e-mail desse tamanho em base64 ficaria enorme.
+  Toda imagem sai como arquivo de verdade em `assets/`, com um `src`
+  provisório (`assets/<nome-do-arquivo>`) — depois de gerar, **suba cada
+  arquivo no host de imagens da ferramenta de e-mail marketing e troque o
+  `src` pela URL que ela devolver**. Cada `<img>` tem um comentário HTML
+  em cima avisando qual arquivo é.
+- **Link real só onde existe URL real**: os cases @arpejo já saem com
+  `<a href>` de verdade (o script conhece a URL). Título de News/Trends
+  sem URL de origem conhecida fica como texto normal, sem link — não
+  invente destino, é a mesma regra do Formato 1.
+
 ## Os scripts
 
-- `scripts/build_news_email.py` — gera o HTML autocontido. Edite só o bloco
-  "EDITAR TODO MÊS" (tagline da capa, News, Trends, @arpejo, Insights,
-  Indicações, Fontes).
-- `scripts/capture_news_email.py` — renderiza o HTML pra imagem final
-  (PNG/JPEG) via Playwright.
-- `scripts/build_news_email_scroll_gif.py` — gera a prévia em GIF (opcional,
-  só se pedirem).
+- `lib/news_email_content.py` — o conteúdo do mês (tagline da capa, News,
+  Trends, @arpejo, Insights, Indicações, Fontes). **Edite só aqui** — os
+  dois formatos de saída importam desse mesmo arquivo, então editar uma vez
+  atualiza os dois.
+- `scripts/build_news_email.py` — Formato 1: gera o HTML autocontido
+  (fontes/fotos em base64).
+- `scripts/capture_news_email.py` — renderiza o HTML do Formato 1 pra
+  imagem final (PNG/JPEG) via Playwright.
+- `scripts/build_news_email_scroll_gif.py` — gera a prévia em GIF do
+  Formato 1 (opcional, só se pedirem).
+- `scripts/build_news_email_marketing_html.py` — Formato 2: gera o HTML de
+  e-mail marketing (tabelas, estilo inline) + os arquivos de imagem
+  pré-cortados em `assets/`.

@@ -157,9 +157,12 @@ declare uma imagem "melhorada" sem ter rodado o processamento de verdade.
 - **Ver `references/news-crm.md` para as diretrizes completas** (confirmado
   pela Bianca em agosto/26) — não redesenhe essa peça do zero, siga esse
   documento.
-- **Não é um `.pptx`** — é uma **imagem única e alta**, pra colar direto no
-  corpo de um e-mail/campanha de CRM. Gerada via HTML/CSS autocontido +
-  screenshot de página inteira (Playwright), não via pptxgenjs.
+- **Não é um `.pptx`** — tem **dois formatos de saída**, mesmo conteúdo:
+  (1) uma imagem única e alta pra colar direto no corpo de um e-mail
+  (HTML/CSS autocontido + screenshot de página inteira via Playwright), ou
+  (2) HTML real de e-mail marketing (tabelas, estilo inline, sem CSS
+  externo) pra colar no editor de uma ferramenta de campanha. Nenhum dos
+  dois usa pptxgenjs. Confirme com a Bianca qual formato ela precisa.
 - **Fonte de conteúdo**: mesmo recorte do material de cliente (item 3) —
   News + Trends + @arpejo + Insights + Indicações, o mesmo recap completo,
   só que organizado como newsletter de coluna única em vez de slides.
@@ -204,10 +207,12 @@ declare uma imagem "melhorada" sem ter rodado o processamento de verdade.
    report. Use o arquivo `assets/arpejo-report-logo.png` (ou a variante
    `arpejo-report-logo-all-black.png` sobre fundo limão) para o wordmark
    sempre que a peça precisar assinar como Arpejo. Para o **News de CRM**,
-   que não é slide deck, use `scripts/build_news_email.py` +
-   `scripts/capture_news_email.py` (só edite o bloco "EDITAR TODO MÊS" do
-   primeiro) — é HTML/CSS autocontido capturado com Playwright, não
-   pptxgenjs, ver `references/news-crm.md`.
+   que não é slide deck, edite só `scripts/lib/news_email_content.py`
+   (conteúdo do mês, compartilhado pelos dois formatos) e gere com
+   `scripts/build_news_email.py` + `scripts/capture_news_email.py`
+   (Formato 1, imagem) e/ou `scripts/build_news_email_marketing_html.py`
+   (Formato 2, HTML de e-mail marketing) — nenhum usa pptxgenjs, ver
+   `references/news-crm.md`.
 
    **Duas pegadinhas do pptxgenjs a evitar em qualquer script novo (o
    carrossel e a prospecção já usam essas correções, mantenha-as se
