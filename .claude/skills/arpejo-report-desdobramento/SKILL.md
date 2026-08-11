@@ -89,15 +89,35 @@ declare uma imagem "melhorada" sem ter rodado o processamento de verdade.
   "compartilhável" — comportamento, cultura), NEWS como segunda opção.
   @arpejo pode aparecer só como card final de fechamento ("quem faz esse
   report é a gente" / CTA), nunca misturado entre os cards de conteúdo.
-- **Formato**: canvas vertical 1080×1350px (proporção 4:5, padrão de feed).
+- **Formato**: canvas vertical 9×11.25in (proporção 4:5, padrão de feed).
   Estrutura: capa (edição do mês) → 3 a 6 cards, um conceito por card → card
   de fechamento com CTA (ex.: "relatório completo com a gente" / @arpejo).
-- **Tom**: uma ideia por card, texto reduzido ao essencial — quem rola o feed
-  não vai ler um parágrafo de 4 linhas. Condense o "Para as marcas" do report
-  original numa frase de impacto, mantendo o significado.
+- **Layout: use sempre `scripts/build-instagram-carousel.js`** — é o padrão
+  confirmado pela Bianca (agosto/26), puxado diretamente do próprio
+  report identity: painel preto arredondado sobre o fundo de cor do card,
+  faixa de plus-grid + globo, título em duas linhas com a 2ª dentro de um
+  oval, headline + frase de detalhe + dado/fonte. Ver a descrição completa
+  em `references/identity.md` ("Card de Trend"). **Não redesenhe esse
+  layout do zero** — edite só o conteúdo (`CARDS` e a tagline do mês) no
+  topo do script, marcado com comentários "EDITAR TODO MÊS".
+- Cada card tem: título (2 linhas), headline (1 frase de impacto, o "Para as
+  marcas" do report resumido), uma frase de detalhe com mais contexto sobre
+  a tendência, e o dado/fonte. Nunca invente estatística — se o report não
+  trouxer um número claro pra aquela tendência, resuma a fonte em texto.
+- **Legenda**: tom pessoal, conversacional, primeira pessoa do plural — sem
+  jargão técnico/de marketing (nada de "dado, fonte", ".report mensal",
+  hashtags em inglês). Valide com
+  `running-marketing-campaigns/scripts/brand_checker.py check` antes de
+  entregar. Ver exemplo aprovado em `references/identity.md`.
 - Escolha os itens mais visuais e universais (que não dependem de contexto de
   categoria de cliente específico) — se não estiver óbvio quais, liste as
   opções para a Bianca escolher em vez de decidir por conta própria.
+- Se a Bianca pedir uma prévia interativa (mockup do feed) ou um GIF do
+  carrossel, gere um HTML autocontido espelhando a mesma geometria do
+  script (mesmos valores em polegadas, convertidos para `%`/`cqw` do
+  container) e capture screenshots com Playwright
+  (`/opt/pw-browsers/chromium`) — não tente renderizar o `.pptx` via
+  LibreOffice/`soffice` neste ambiente, a conversão está quebrada.
 
 ### 2. Apresentação de prospecção
 
@@ -136,17 +156,28 @@ declare uma imagem "melhorada" sem ter rodado o processamento de verdade.
    qualquer slide), **e também a skill `brand-guidelines`** para os tokens de
    cor/tipografia/motivos — este skill não duplica mais essa informação, só
    documenta em `references/identity.md` os layouts específicos de cada tipo
-   de card do report. Prefira escrever um script `pptxgenjs` do zero para
-   cada peça — os formatos (vertical 4:5 para Instagram, 16:9 para as
-   outras) não batem com o canvas customizado do template original, então
-   recriar os componentes visuais como funções reutilizáveis é mais
-   confiável do que tentar clonar slides do arquivo-fonte. Use o arquivo
-   `assets/arpejo-report-logo.png` para o wordmark sempre que a peça
-   precisar assinar como Arpejo.
-4. **QA obrigatório**: rode a validação e a conversão para imagem da skill
-   `pptx` e confira visualmente cada slide antes de entregar — texto cortado,
-   contraste ruim (texto escuro sobre preto, etc.) e alinhamento são os erros
-   mais comuns ao recriar um sistema visual do zero.
+   de card do report. Para o **carrossel do Instagram, reutilize
+   `scripts/build-instagram-carousel.js`** (só edite o conteúdo do mês, ver
+   os comentários "EDITAR TODO MÊS" no arquivo) em vez de redesenhar o
+   layout do zero — é o padrão confirmado pela Bianca. Para prospecção e
+   material de cliente (16:9, sem template persistido ainda), prefira
+   escrever um script `pptxgenjs` do zero — os formatos não batem com o
+   canvas customizado do arquivo-fonte, então recriar os componentes visuais
+   como funções reutilizáveis é mais confiável do que tentar clonar slides
+   direto do report. Use o arquivo `assets/arpejo-report-logo.png` (ou a
+   variante `arpejo-report-logo-all-black.png` sobre fundo limão) para o
+   wordmark sempre que a peça precisar assinar como Arpejo. Depois de gerar
+   qualquer `.pptx`, rode `brand-guidelines/scripts/embed_fonts.py` nele —
+   pptxgenjs não embute fontes sozinho.
+4. **QA obrigatório**: rode a validação de schema da skill `pptx`
+   (`python-pptx` consegue abrir o arquivo, XML válido) antes de entregar.
+   **A conversão `.pptx`→imagem via LibreOffice/`soffice` está quebrada
+   neste ambiente** (falha mesmo em arquivos triviais) — não perca tempo
+   tentando. Para conferir o layout visualmente antes de entregar, gere uma
+   prévia HTML autocontida com a mesma geometria do script e capture
+   screenshots com Playwright (`/opt/pw-browsers/chromium`, veja o padrão
+   usado na prévia interativa do carrossel) em vez de confiar só nos
+   cálculos de posição.
 5. **Entregue os três arquivos junto com um resumo curto** de quais itens do
    report foram usados em cada peça e por quê (isso também facilita a Bianca
    pedir ajuste pontual em vez de regenerar tudo).
