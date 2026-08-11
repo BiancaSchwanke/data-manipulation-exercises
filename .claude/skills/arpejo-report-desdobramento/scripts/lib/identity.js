@@ -1,4 +1,5 @@
 const path = require("path");
+const sizeOf = require("image-size");
 
 const COLORS = {
   black: "000000",
@@ -156,6 +157,30 @@ function addHeaderStrip(slide, { slideW, color, month, fontSize = 10, yOffset = 
   });
 }
 
+// pptxgenjs's `sizing: { type: "cover" }` is broken in the installed version
+// (4.0.1): it computes the crop ratio from the placement box's own w/h
+// instead of the source image's real pixel dimensions, which always yields a
+// zero-percent crop (`srcRect l="0" r="0" t="0" b="0"`) — i.e. a plain
+// stretch, not a cover-crop. That stretch is what shows up as distorted
+// (squished/elongated) photos whenever the image's aspect ratio doesn't
+// exactly match the target box. Work around it by reading the real image
+// dimensions ourselves and feeding pptxgenjs a top-level w/h with the
+// correct aspect ratio — its cover-crop math only ever uses that pair for
+// the ratio (the actual placed size always comes from `sizing.w`/`sizing.h`),
+// so this restores real cover-crop behavior without patching the library.
+function addCoverImage(slide, { path: imgPath, x, y, w, h }) {
+  const { width, height } = sizeOf(imgPath);
+  // Only the width:height *ratio* matters here (see comment above) — divide
+  // down from raw pixels so we never hand pptxgenjs a "w/h in inches" value
+  // large enough to overflow EMU math (pixels * 914400 per inch).
+  slide.addImage({
+    path: imgPath,
+    x, y,
+    w: width / 100, h: height / 100,
+    sizing: { type: "cover", w, h },
+  });
+}
+
 module.exports = {
   COLORS,
   FONT_TITLE,
@@ -171,4 +196,5 @@ module.exports = {
   addArrowIcon,
   addLogo,
   addHeaderStrip,
+  addCoverImage,
 };

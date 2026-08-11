@@ -46,6 +46,7 @@ const {
   addGlobeIcon,
   addArrowIcon,
   addLogo,
+  addCoverImage,
 } = require("./lib/identity");
 
 const LOGO = process.argv[2];
@@ -264,9 +265,8 @@ CARDS.forEach((card, i) => {
 
   if (!bandTop) {
     // Photo framed inside the panel, between title and body text.
-    s.addImage({
+    addCoverImage(s, {
       path: photoPath, x: PANEL_X + PHOTO_PAD, y: photoY, w: PANEL_W - 2 * PHOTO_PAD, h: PHOTO_H_INSET,
-      sizing: { type: "cover", w: PANEL_W - 2 * PHOTO_PAD, h: PHOTO_H_INSET },
     });
     s.addText(card.headline, { x: PANEL_X + 0.35, y: textY, w: PANEL_W - 0.7, h: 0.8, fontFace: FONT_BODY, bold: true, fontSize: 14, color: fg, align: "left", valign: "top", margin: 0 });
     s.addText(card.detail, { x: PANEL_X + 0.35, y: textY + 0.8, w: PANEL_W - 0.7, h: 1.0, fontFace: FONT_BODY, fontSize: 11, color: fg, align: "left", valign: "top", margin: 0 });
@@ -277,7 +277,7 @@ CARDS.forEach((card, i) => {
     s.addText(card.headline, { x: PANEL_X + 0.35, y: textY, w: PANEL_W - 0.7, h: 0.8, fontFace: FONT_BODY, bold: true, fontSize: 14, color: fg, align: "left", valign: "top", margin: 0 });
     s.addText(card.detail, { x: PANEL_X + 0.35, y: textY + 0.8, w: PANEL_W - 0.7, h: 1.0, fontFace: FONT_BODY, fontSize: 11, color: fg, align: "left", valign: "top", margin: 0 });
     s.addText(card.stat, { x: PANEL_X + 0.35, y: textY + 1.8, w: PANEL_W - 0.7, h: 0.6, fontFace: FONT_MONO, fontSize: 10, color: fg, align: "left", valign: "top", margin: 0 });
-    s.addImage({ path: photoPath, x: 0, y: photoY, w: W, h: H - photoY, sizing: { type: "cover", w: W, h: H - photoY } });
+    addCoverImage(s, { path: photoPath, x: 0, y: photoY, w: W, h: H - photoY });
   }
 });
 

@@ -39,6 +39,7 @@ const {
   addGlobeIcon,
   addArrowIcon,
   addLogo,
+  addCoverImage,
 } = require("./lib/identity");
 
 const LOGO = process.argv[2];
@@ -217,10 +218,9 @@ TREND_CARDS.forEach((card) => {
     fontFace: FONT_MONO, fontSize: 10, color: fg, align: "left", valign: "top", margin: 0,
   });
 
-  s.addImage({
+  addCoverImage(s, {
     path: path.join(PHOTOS_DIR, card.photo),
     x: photoX, y: panelY + PHOTO_PAD, w: photoW, h: panelH - 2 * PHOTO_PAD,
-    sizing: { type: "cover", w: photoW, h: panelH - 2 * PHOTO_PAD },
   });
 });
 
@@ -343,10 +343,9 @@ const CASES = [
     { x: diffTextX, y: panelY + 2.0, w: diffTextColW - 0.5, h: 3.0, fontFace: FONT_BODY, fontSize: 13.5, color: COLORS.white, valign: "top", margin: 0 }
   );
 
-  s.addImage({
+  addCoverImage(s, {
     path: path.join(PHOTOS_DIR, "prospect-diferencial.jpg"),
     x: diffPhotoX, y: panelY + 0.35, w: diffPhotoW, h: panelH - 0.7,
-    sizing: { type: "cover", w: diffPhotoW, h: panelH - 0.7 },
   });
 
   addArrowIcon(s, { x: W - 1, y: H - 1, size: 0.32, colorName: "black", corner: "SE" });
