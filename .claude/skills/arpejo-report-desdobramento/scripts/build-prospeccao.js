@@ -10,8 +10,9 @@
 // — do not redesign it from scratch next time; adapt this file. Sections
 // marked "EDITAR TODO MÊS" carry the content that changes edition to
 // edition (cover tagline, market stats, trend deep-dive cards, @arpejo
-// cases). The institutional section (slides 5-7) only needs to change if
-// Bianca sends an updated institutional deck — see references/prospeccao.md.
+// cases). The institutional section (slide 5, manifesto) only needs to
+// change if Bianca sends an updated institutional deck — see
+// references/prospeccao.md.
 //
 // Setup (once per machine/session): `npm install pptxgenjs` in this
 // directory (or wherever you run the script from).
@@ -265,70 +266,10 @@ TREND_CARDS.forEach((card) => {
   );
 }
 
-// ---------- 6. Institucional: clientes ----------
-{
-  const s = pres.addSlide();
-  s.background = { color: COLORS.coral };
-  sectionLabel(s, "QUEM CONFIA NA GENTE", COLORS.black);
-  s.addText("Marcas que já construíram\ndirecionais sólidos com a Arpejo.", {
-    x: SIDE_MARGIN, y: 1.0, w: W - 2 * SIDE_MARGIN, h: 1.3,
-    fontFace: FONT_TITLE, italic: true, bold: true, fontSize: 24, color: COLORS.black, margin: 0,
-  });
-
-  s.addShape("roundRect", { x: SIDE_MARGIN, y: 2.5, w: W - 2 * SIDE_MARGIN, h: 4.4, rectRadius: 0.18, fill: { color: COLORS.black } });
-  const CLIENTS = [
-    "Santa Massa", "Solito Alimentos", "Equatorial Energia", "Lwart", "Educação Adventista",
-    "Unna", "Óttima", "Nutrive", "Performa Natural", "Formica",
-    "Grupo Formitex", "Donmario Sementes", "ZF", "Mendorato", "Crokíssimo",
-    "Unimed Campinas", "Quallity Pró Saúde", "Delphi", "PagueVeloz by Serasa", "Desktop",
-  ];
-  const cols = 4;
-  const rows = 5;
-  const cellW = (W - 2 * SIDE_MARGIN - 0.8) / cols;
-  const cellH = 3.8 / rows;
-  CLIENTS.forEach((name, i) => {
-    const col = i % cols;
-    const row = Math.floor(i / cols);
-    s.addText(name, {
-      x: SIDE_MARGIN + 0.4 + col * cellW, y: 2.8 + row * cellH, w: cellW - 0.2, h: cellH,
-      fontFace: FONT_MONO, fontSize: 12, color: COLORS.lime, valign: "middle", margin: 0,
-    });
-  });
-}
-
-// ---------- 7. Institucional: estrutura, liderança, time ----------
-{
-  const s = pres.addSlide();
-  s.background = { color: COLORS.black };
-  sectionLabel(s, "COMO A GENTE É ORGANIZADA");
-
-  const blocks = [
-    {
-      title: "Estrutura",
-      body: "Sede em Campinas/SP — o escritório Open House, pensado desde a planta pra criatividade fluir — e uma base estratégica em São Luís/MA.",
-    },
-    {
-      title: "Sócios na liderança",
-      body: "Quadro societário composto por posições de liderança nas principais áreas da agência. Isso mantém a essência estratégica, técnica e criativa independente dos movimentos do mercado.",
-    },
-    {
-      title: "+90 pessoas, 8 estados",
-      body: "Um time plural, presente em DF, MA, MG, PR, PE, RS, RN e SP.",
-    },
-  ];
-  const gap = 0.4;
-  const cardW = (W - 2 * SIDE_MARGIN - 2 * gap) / 3;
-  blocks.forEach((b, i) => {
-    const x = SIDE_MARGIN + i * (cardW + gap);
-    s.addShape("roundRect", { x, y: 1.3, w: cardW, h: 5.4, rectRadius: 0.16, fill: { color: "141414" }, line: { color: "333333", width: 0.75 } });
-    s.addText(b.title, {
-      x: x + 0.3, y: 1.6, w: cardW - 0.6, h: 0.9, fontFace: FONT_TITLE, italic: true, bold: true, fontSize: 18, color: COLORS.lime, valign: "top", margin: 0,
-    });
-    s.addText(b.body, {
-      x: x + 0.3, y: 2.6, w: cardW - 0.6, h: 3.8, fontFace: FONT_BODY, fontSize: 12.5, color: COLORS.white, valign: "top", margin: 0,
-    });
-  });
-}
+// Nota: os slides institucionais de "clientes" e "estrutura/liderança/time"
+// foram removidos a pedido da Bianca (deck mais enxuto) — os fatos
+// continuam documentados em references/prospeccao.md, caso ela peça pra
+// trazer algum de volta numa próxima edição.
 
 // ============================================================
 // EDITAR TODO MÊS (4/4): cases @arpejo executados no mês.
@@ -348,7 +289,7 @@ const CASES = [
   },
 ];
 
-// ---------- 8. Prova — cases @arpejo ----------
+// ---------- 6. Prova — cases @arpejo ----------
 {
   const s = pres.addSlide();
   s.background = { color: COLORS.black };
@@ -373,7 +314,7 @@ const CASES = [
   });
 }
 
-// ---------- 9. Diferencial: o .report mensal ----------
+// ---------- 7. Diferencial: o .report mensal ----------
 {
   const s = pres.addSlide();
   s.background = { color: COLORS.lime };
@@ -389,23 +330,10 @@ const CASES = [
   addArrowIcon(s, { x: W - 1, y: H - 1, size: 0.32, colorName: "black", corner: "SE" });
 }
 
-// ---------- 10. Como trabalhamos ----------
-{
-  const s = pres.addSlide();
-  s.background = { color: COLORS.black };
-  sectionLabel(s, "COMO TRABALHAMOS");
-  const steps = ["Diagnóstico", "Estratégia", "Criação & mídia", ".report mensal contínuo"];
-  const gap = 0.4;
-  const cardW = (W - 2 * SIDE_MARGIN - 3 * gap) / 4;
-  steps.forEach((st, i) => {
-    const x = SIDE_MARGIN + i * (cardW + gap);
-    s.addShape("roundRect", { x, y: 2.8, w: cardW, h: 2.0, rectRadius: 0.14, fill: { color: "141414" }, line: { color: COLORS.lime, width: 0.75 } });
-    s.addText(String(i + 1).padStart(2, "0"), { x: x + 0.25, y: 3.0, w: cardW - 0.5, h: 0.6, fontFace: FONT_MONO, fontSize: 15, color: COLORS.lime, margin: 0 });
-    s.addText(st, { x: x + 0.25, y: 3.55, w: cardW - 0.5, h: 1.1, fontFace: FONT_BODY, bold: true, fontSize: 14, color: COLORS.white, valign: "top", margin: 0 });
-  });
-}
+// Nota: o slide de "como trabalhamos" (processo em 4 etapas) foi removido
+// a pedido da Bianca (deck mais enxuto).
 
-// ---------- 11. CTA ----------
+// ---------- 8. CTA ----------
 {
   const s = pres.addSlide();
   s.background = { color: COLORS.black };
