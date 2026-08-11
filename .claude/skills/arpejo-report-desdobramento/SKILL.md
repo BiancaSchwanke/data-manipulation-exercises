@@ -175,7 +175,14 @@ declare uma imagem "melhorada" sem ter rodado o processamento de verdade.
    variante `arpejo-report-logo-all-black.png` sobre fundo limão) para o
    wordmark sempre que a peça precisar assinar como Arpejo. Depois de gerar
    qualquer `.pptx`, rode `brand-guidelines/scripts/embed_fonts.py` nele —
-   pptxgenjs não embute fontes sozinho.
+   pptxgenjs não embute fontes sozinho. Se algum slide encaixa uma foto num
+   painel de cantos arredondados desenhando um contorno `roundRect` por cima
+   (em vez de inserir a foto com margem dentro do painel), rode também
+   `brand-guidelines/scripts/clip_pictures_to_roundrect.py` — o `addImage` do
+   pptxgenjs só recorta em retângulo ou elipse, então a foto quadrada vaza
+   pelos cantos do contorno arredondado; o script copia a geometria
+   `roundRect` do contorno pra própria imagem direto no XML, sem precisar
+   mexer no pptxgenjs.
 4. **QA obrigatório**: rode a validação de schema da skill `pptx`
    (`python-pptx` consegue abrir o arquivo, XML válido) antes de entregar.
    **A conversão `.pptx`→imagem via LibreOffice/`soffice` está quebrada
