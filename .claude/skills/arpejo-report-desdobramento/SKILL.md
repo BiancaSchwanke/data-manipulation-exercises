@@ -121,17 +121,24 @@ declare uma imagem "melhorada" sem ter rodado o processamento de verdade.
 
 ### 2. Apresentação de prospecção
 
-- **Fonte de conteúdo**: 2-3 highlights curados de TRENDS/NEWS como gancho
-  ("o mercado está mudando, e é assim") + campanhas de @arpejo como prova de
-  execução (portfólio) + o próprio `.report` mensal citado como diferencial de
-  serviço (mostrar que a agência entrega esse tipo de inteligência todo mês é
-  parte do pitch).
-- **Nunca usar Insights** — não é trabalho da agência, e é benefício de
-  cliente, não isca de venda.
+- **Ver `references/prospeccao.md` para as diretrizes completas** (confirmado
+  pela Bianca em agosto/26) — não redesenhe essa peça do zero, siga esse
+  documento.
+- **Duas fontes de conteúdo, uma identidade visual só**: a seção de
+  mercado/tendências vem do `.report` mensal (TRENDS/NEWS, nunca Insights);
+  a seção institucional/metodologia vem da apresentação comercial real da
+  agência, salva em `assets/apresentacao-institucional-arpejo.pdf`
+  (manifesto "A técnica constrói...", "Good skills, Gold feeling", prêmios,
+  clientes, estrutura, liderança, tamanho do time — reaproveite esses fatos
+  reais, não invente). Toda a peça usa só a identidade visual do `.report`
+  (painel preto, chrome band, título com oval) — o PDF institucional tem um
+  sistema visual próprio (preto/branco, textura de ruído) que serve só como
+  fonte de conteúdo, nunca como referência de design.
 - **Formato**: 16:9, ~10-14 slides. Estrutura narrativa: capa → "o mercado
-  está mudando" (hook com trends/news) → posicionamento da Arpejo → prova
-  (cases @arpejo) → como trabalhamos / o que entregamos (incluindo o report
-  mensal como diferencial) → CTA/próximos passos.
+  está mudando" (hook com trends/news, no padrão de card do report) → quem é
+  a Arpejo (institucional, ver acima) → prova (cases @arpejo) → como
+  trabalhamos / o que entregamos (incluindo o report mensal como
+  diferencial) → CTA/próximos passos.
 
 ### 3. Material para clientes
 
