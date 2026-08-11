@@ -100,12 +100,15 @@ não misture dados de versões diferentes.
 | Fotos do escritório/equipe | Podem ir dentro do painel (foto emoldurada) ou sangrando, seguindo a mesma alternância de variante `bandTop` usada no carrossel. São fotos próprias da Arpejo — seguras quanto a procedência de imagem, mas confirme uso de foto de pessoas identificáveis com a Bianca. |
 | Ícone de estrela/sparkle, textura de ruído, menu hambúrguer | Não reaproveitar — são elementos do sistema visual institucional, não do `.report`. Use os ícones do report (globo, seta, grid de "+") no lugar. |
 
-## Ao montar o script
+## O script
 
-Ainda não existe um `build-prospeccao-carousel.js`-equivalente persistido
-como o do carrossel (`scripts/build-instagram-carousel.js`) — o script atual
-de prospecção usado em agosto/26 ficou em ambiente de trabalho temporário,
-não na skill. Ao gerar a próxima prospecção, considere salvar o script
-resultante em `scripts/` (seguindo o mesmo padrão do carrossel: helpers
-compartilhados em `scripts/lib/identity.js`, conteúdo do mês isolado num
-bloco comentado "EDITAR TODO MÊS") para não repetir esse trabalho de novo.
+`scripts/build-prospeccao.js` é o padrão persistido (confirmado pela Bianca
+em agosto/26) — reutilize-o todo mês em vez de redesenhar do zero. Edite só
+os quatro blocos marcados "EDITAR TODO MÊS": a tagline da capa, as
+estatísticas de mercado, os dois cards de tendência em destaque (mesmo
+motor de layout dos cards do carrossel — painel preto, oval, chrome band —
+adaptado pro canvas 16:9 como divisão esquerda/direita em vez do
+empilhamento vertical) e os cases @arpejo do mês. Os slides institucionais
+(5-7: manifesto, clientes, estrutura/liderança/time) só devem mudar se a
+Bianca enviar uma versão atualizada da apresentação institucional — nesse
+caso, revise também os fatos listados na seção anterior deste documento.
