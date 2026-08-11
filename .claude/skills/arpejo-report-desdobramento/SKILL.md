@@ -8,11 +8,14 @@ description: >
   proactively any time a new monthly report file (PDF or PPTX, sections like
   NEWS / TRENDS / @arpejo / INSIGHTS / INDICAÇÕES ARPEJERS / FONTES) is
   uploaded, even without an explicit instruction, since this is a recurring
-  monthly workflow. Produces three derivative deliverables from one source
+  monthly workflow. Produces four derivative deliverables from one source
   report: (1) an Instagram carousel post for @arpejo, (2) a market-prospecting
-  presentation, (3) a client-facing recap. Always enforce the confidentiality
-  rule described in this skill — the Insights chapter is client-only and must
-  never appear in the Instagram carousel or the prospecting deck.
+  presentation, (3) a client-facing recap (pptx), (4) a "News de CRM" — a
+  single tall image, in the report's visual identity, for pasting into a
+  client email/CRM campaign. Always enforce the confidentiality rule
+  described in this skill — the Insights chapter is client-only and must
+  never appear in the Instagram carousel or the prospecting deck (it may
+  appear in the client recap and the News de CRM, both client-only pieces).
 ---
 
 # Desdobramento do .report mensal da Arpejo
@@ -149,6 +152,31 @@ declare uma imagem "melhorada" sem ter rodado o processamento de verdade.
   do report completo — mantém a estrutura por seção (News → Trends → @arpejo
   → Insights) só que condensada.
 
+### 4. News de CRM (e-mail)
+
+- **Ver `references/news-crm.md` para as diretrizes completas** (confirmado
+  pela Bianca em agosto/26) — não redesenhe essa peça do zero, siga esse
+  documento.
+- **Não é um `.pptx`** — é uma **imagem única e alta**, pra colar direto no
+  corpo de um e-mail/campanha de CRM. Gerada via HTML/CSS autocontido +
+  screenshot de página inteira (Playwright), não via pptxgenjs.
+- **Fonte de conteúdo**: mesmo recorte do material de cliente (item 3) —
+  News + Trends + @arpejo + Insights + Indicações, o mesmo recap completo,
+  só que organizado como newsletter de coluna única em vez de slides.
+  Insights pode entrar (peça exclusiva de cliente).
+- **Formato**: coluna única de 640px de largura, altura variável (a peça
+  inteira, tipicamente vários milhares de px de altura). Estrutura editorial
+  curada (poucos blocos, cada um com imagem/badge + título + corpo + link),
+  inspirada na organização de referências reais de newsletter que a Bianca
+  mandou (ver `references/news-crm.md`) — nunca copie o sistema visual
+  dessas referências, só a organização em blocos.
+- **Links**: a imagem final não carrega links — cada título/linha
+  clicável só fica marcado visualmente (cor de destaque, sublinhado). Quem
+  monta a campanha adiciona a área clicável por cima depois. Repasse a lista
+  de "título → URL real" que o script imprime pros cases @arpejo; para
+  News/Trends sem URL de origem conhecida, pergunte à Bianca o destino antes
+  de fechar a campanha.
+
 ## Como gerar as peças
 
 1. **Leia o report de origem.** PDF: use `Read` com `pages` em blocos de até
@@ -175,7 +203,11 @@ declare uma imagem "melhorada" sem ter rodado o processamento de verdade.
    reutilizáveis é mais confiável do que tentar clonar slides direto do
    report. Use o arquivo `assets/arpejo-report-logo.png` (ou a variante
    `arpejo-report-logo-all-black.png` sobre fundo limão) para o wordmark
-   sempre que a peça precisar assinar como Arpejo.
+   sempre que a peça precisar assinar como Arpejo. Para o **News de CRM**,
+   que não é slide deck, use `scripts/build_news_email.py` +
+   `scripts/capture_news_email.py` (só edite o bloco "EDITAR TODO MÊS" do
+   primeiro) — é HTML/CSS autocontido capturado com Playwright, não
+   pptxgenjs, ver `references/news-crm.md`.
 
    **Duas pegadinhas do pptxgenjs a evitar em qualquer script novo (o
    carrossel e a prospecção já usam essas correções, mantenha-as se
@@ -200,20 +232,26 @@ declare uma imagem "melhorada" sem ter rodado o processamento de verdade.
    Depois de gerar qualquer `.pptx`, rode
    `brand-guidelines/scripts/embed_fonts.py` nele — pptxgenjs não embute
    fontes sozinho.
-4. **QA obrigatório**: rode a validação de schema da skill `pptx`
-   (`python-pptx` consegue abrir o arquivo, XML válido) antes de entregar.
-   **A conversão `.pptx`→imagem via LibreOffice/`soffice` está quebrada
-   neste ambiente** (falha mesmo em arquivos triviais) — não perca tempo
-   tentando. Para conferir o layout visualmente antes de entregar, gere uma
-   prévia HTML autocontida com a mesma geometria do script e capture
-   screenshots com Playwright (`/opt/pw-browsers/chromium`, veja o padrão
-   usado na prévia interativa do carrossel) em vez de confiar só nos
-   cálculos de posição.
-5. **Entregue os três arquivos junto com um resumo curto** de quais itens do
-   report foram usados em cada peça e por quê (isso também facilita a Bianca
-   pedir ajuste pontual em vez de regenerar tudo).
+4. **QA obrigatório**: pras três peças em `.pptx`, rode a validação de
+   schema da skill `pptx` (`python-pptx` consegue abrir o arquivo, XML
+   válido) antes de entregar. **A conversão `.pptx`→imagem via
+   LibreOffice/`soffice` está quebrada neste ambiente** (falha mesmo em
+   arquivos triviais) — não perca tempo tentando. Para conferir o layout
+   visualmente antes de entregar, gere uma prévia HTML autocontida com a
+   mesma geometria do script e capture screenshots com Playwright
+   (`/opt/pw-browsers/chromium`, veja o padrão usado na prévia interativa do
+   carrossel) em vez de confiar só nos cálculos de posição. Pro **News de
+   CRM**, o próprio `capture_news_email.py` já É a renderização final (não
+   uma prévia aproximada) — confira o resultado em pedaços (a imagem é
+   muito alta pra caber numa checagem só) antes de entregar.
+5. **Entregue os quatro arquivos junto com um resumo curto** de quais itens
+   do report foram usados em cada peça e por quê (isso também facilita a
+   Bianca pedir ajuste pontual em vez de regenerar tudo). No News de CRM,
+   inclua a lista de "título → URL real" dos links que o script conhece
+   (cases @arpejo) e avise quais títulos ainda precisam de um destino
+   definido pela Bianca.
 
-Se a Bianca pedir só uma das três peças isoladamente num outro momento (ex.:
-"faz só o carrossel desse mês"), siga as mesmas regras de conteúdo e
-identidade acima — não é preciso gerar as três de uma vez sempre que essa
+Se a Bianca pedir só uma das quatro peças isoladamente num outro momento
+(ex.: "faz só o carrossel desse mês"), siga as mesmas regras de conteúdo e
+identidade acima — não é preciso gerar as quatro de uma vez sempre que essa
 skill for usada.
