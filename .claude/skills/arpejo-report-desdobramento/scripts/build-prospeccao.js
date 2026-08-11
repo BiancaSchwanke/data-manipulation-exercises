@@ -315,18 +315,40 @@ const CASES = [
 }
 
 // ---------- 7. Diferencial: o .report mensal ----------
+// Same rounded-panel language as the trend cards (slides 3-4): a black
+// panel floating on the lime background, text column + photo column. No
+// chrome band or oval title here — this isn't a trend card, just the same
+// panel motif reused for visual consistency across the deck.
 {
   const s = pres.addSlide();
   s.background = { color: COLORS.lime };
   addGlobeIcon(s, { x: W - 1.1, y: 0.5, size: 0.45, colorName: "black" });
   s.addText("report↗", { x: SIDE_MARGIN, y: 0.5, w: 2, h: 0.4, fontFace: FONT_MONO, bold: true, fontSize: 12, color: COLORS.black, margin: 0 });
+
+  const panelY = 1.25;
+  const panelH = H - panelY - 0.5;
+  s.addShape("roundRect", { x: PANEL_X, y: panelY, w: PANEL_W, h: panelH, rectRadius: 0.2, fill: { color: COLORS.black }, line: { type: "none" } });
+
+  const diffTextColW = PANEL_W * 0.5;
+  const diffTextX = PANEL_X + 0.45;
+  const diffPhotoX = PANEL_X + diffTextColW + 0.4;
+  const diffPhotoW = PANEL_X + PANEL_W - diffPhotoX - 0.35;
+
   s.addText("O nosso diferencial: inteligência de mercado, todo mês.", {
-    x: SIDE_MARGIN, y: 1.5, w: W - 2 * SIDE_MARGIN, h: 1.2, fontFace: FONT_TITLE, italic: true, bold: true, fontSize: 26, color: COLORS.black, margin: 0,
+    x: diffTextX, y: panelY + 0.4, w: diffTextColW - 0.5, h: 1.5,
+    fontFace: FONT_TITLE, italic: true, bold: true, fontSize: 22, color: COLORS.lime, valign: "top", margin: 0,
   });
   s.addText(
     "Isso que você viu até agora — leitura de tendências de consumo, novidades de plataformas e cases que inspiram — é o nosso .report: um relatório proprietário que produzimos todo mês pra orientar as decisões dos nossos clientes.\n\nQuem fecha com a Arpejo não recebe só campanha. Recebe visão de mercado aplicada, com frequência mensal.",
-    { x: SIDE_MARGIN, y: 2.8, w: W - 2 * SIDE_MARGIN, h: 2.6, fontFace: FONT_BODY, fontSize: 15, color: "222222", valign: "top", margin: 0 }
+    { x: diffTextX, y: panelY + 2.0, w: diffTextColW - 0.5, h: 3.0, fontFace: FONT_BODY, fontSize: 13.5, color: COLORS.white, valign: "top", margin: 0 }
   );
+
+  s.addImage({
+    path: path.join(PHOTOS_DIR, "prospect-diferencial.jpg"),
+    x: diffPhotoX, y: panelY + 0.35, w: diffPhotoW, h: panelH - 0.7,
+    sizing: { type: "cover", w: diffPhotoW, h: panelH - 0.7 },
+  });
+
   addArrowIcon(s, { x: W - 1, y: H - 1, size: 0.32, colorName: "black", corner: "SE" });
 }
 
