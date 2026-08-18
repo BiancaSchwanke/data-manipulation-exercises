@@ -112,3 +112,36 @@ empilhamento vertical) e os cases @arpejo do mês. Os slides institucionais
 (5-7: manifesto, clientes, estrutura/liderança/time) só devem mudar se a
 Bianca enviar uma versão atualizada da apresentação institucional — nesse
 caso, revise também os fatos listados na seção anterior deste documento.
+
+## Variante personalizada por prospect (marca específica)
+
+Quando a Bianca pede uma apresentação para um prospect nomeado (ex.: "faz
+uma apresentação para a Toyota"), use `scripts/build-prospeccao-
+personalizada.js` em vez do script genérico — confirmado em agosto/26 com
+o lote Toyota / Grupo São Vicente / Agibank / Unimed Campinas. Ele reaproveita
+o mesmo motor visual do deck padrão e personaliza três pontos:
+
+1. **Capa**: tagline vira "Prospecção _ [Marca] _ [mês_ano]".
+2. **Tela nova (slide 3, entre o mercado geral do report e as 2 trend cards)**:
+   painel preto com 3 blocos de movimentação de mercado do *segmento* daquela
+   marca (não do `.report` genérico) — headline + stat + detalhe com fonte —
+   ao lado de um painel de destaque "Para a [Marca]" com a leitura aplicada.
+   Isso é o que aprofunda conhecimento do setor do prospect, além do hook de
+   mercado genérico que já existe no deck padrão.
+3. **CTA final**: cita a marca pelo nome.
+
+O resto do deck (mercado geral, 2 trend cards do report, institucional,
+cases @arpejo, diferencial) é idêntico ao deck padrão — não duplique/edite
+essas partes por marca.
+
+Dados de segmento (`movements`, `synthesisBody`) exigem pesquisa real e
+atual (ex.: dados setoriais, resultados financeiros do próprio prospect,
+movimentações de concorrência) — sempre com fonte nomeada, nunca invente
+número. Nunca use o capítulo Insights do `.report` aqui (mesma regra do
+`SKILL.md`) — a pesquisa de segmento é sobre o *mercado do prospect*, não
+sobre outras marcas cobertas pelo report.
+
+Se o prospect já for cliente da Arpejo (caso: Unimed Campinas, agosto/26),
+sinalize isso à Bianca antes de tratar como prospecção fria — pode ser
+upsell/expansão de conta, o que muda o tom, mas o conteúdo de mercado da
+tela personalizada continua útil do mesmo jeito.
