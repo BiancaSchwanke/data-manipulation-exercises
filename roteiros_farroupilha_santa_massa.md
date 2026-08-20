@@ -1,6 +1,6 @@
 # Roteiros — Acampamento Farroupilha | Santa Massa
 
-Roteiros **simples de produzir**: 1 locação (churrasqueira/bancada), sem elenco em traje típico, sem figuração de desfile. Só produto + churrasco + toques gaúchos discretos (bandeira do RS, cuia de chimarrão, sal grosso), gravados com celular/câmera fixa — no mesmo formato direto das artes que a Santa Massa já usa no Instagram (texto de impacto em caps + close no produto).
+7 roteiros **simples de produzir**: 1 locação (churrasqueira/bancada), sem elenco em traje típico, sem figuração de desfile. Só produto + churrasco + toques gaúchos discretos (bandeira do RS, cuia de chimarrão, sal grosso), gravados com celular/câmera fixa — no mesmo formato direto das artes que a Santa Massa já usa no Instagram (texto de impacto em caps + close no produto).
 
 **Produtos:** Pão de Alho Recheado e Farofas Santa Massa.
 
@@ -103,6 +103,25 @@ Frases prontas para usar como texto na tela (overlay bold, caps) ou legenda de a
 **Overlay:** "É TRI, É CHURRASCO, É SANTA MASSA" → depois "APAIXONADOS POR CHURRASCO."
 **CTA:** "Compartilha com quem também é tri gaúcho."
 **Hashtags:** #SemanaFarroupilha #TriGaúcho #SantaMassa
+
+---
+
+## Roteiro 7 — "Parabéns, Gaúcho!" (Aniversário Tradicionalista)
+**Contexto cultural:** "Parabéns Gaúcho" (ou "Parabéns Crioulo") é a canção de aniversário tradicionalista do RS, em ritmo de xote, composta em 1958 por Dimas Costa e Eleu Salvador. Substitui o parabéns tradicional nas festas do estado — gancho perfeito pra quem faz aniversário durante a Semana Farroupilha ou num CTG.
+**Duração:** 20s | **Shots:** 3 | **Locação única:** mesa de churrasco/piquete.
+
+1. Mesa posta com o churrasco, farofa e pão de alho Santa Massa, alguém batendo palmas fora de quadro (só mãos/ombro) puxando o ritmo do xote.
+2. Corte para o prato sendo servido enquanto a trilha "Parabéns Gaúcho" toca por cima (sample de 10-15s da música ou versão instrumental licenciada).
+3. Still final: prato + embalagens Santa Massa, com a letra em overlay.
+
+**Overlay (letra, estilo legenda/karaokê):**
+> *"Parabéns, parabéns / Saúde e felicidade / Que tu colhas sempre todo dia / Paz e alegria na lavoura da amizade"*
+
+**Locução/legenda de abertura:** "Aniversário no CTG tem trilha própria — e mesa também."
+**CTA:** "Marca quem faz aniversário na Semana Farroupilha e merece essa mesa!"
+**Hashtags:** #ParabénsGaúcho #TradiçãoGaúcha #SantaMassa #SemanaFarroupilha
+
+> **Atenção:** "Parabéns Gaúcho" é obra de Dimas Costa e Eleu Salvador — confirmar com o jurídico/gestora de direitos autorais (ECAD) o licenciamento do trecho musical antes de publicar, mesmo usando só a letra como overlay de texto.
 
 ---
 
